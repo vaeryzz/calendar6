@@ -1,4 +1,4 @@
-from Tkinter import *
+from tkinter import *
 import datetime
 
 months = [
@@ -9,16 +9,16 @@ months = [
 
 ranges = {}
 	
-ranges['January'],   ranges['February'] = ((25, 32), (1, 32), (1, 5)),  ((29, 32), (1, 29), (1, 12))
-ranges['March'],     ranges['April']    = ((26, 29), (1, 32), (1, 9)),  ((26, 32), (1, 31), (1, 7))
-ranges['May'],       ranges['June']     = ((30, 31), (1, 32), (1, 11)),  ((28, 32), (1, 31), (1, 9))
+ranges['January'],   ranges['February'] = ((31, 32), (1, 32), (1, 11)),  ((28, 32), (1, 29), (1, 11))
+ranges['March'],     ranges['April']    = ((25, 29), (1, 32), (1, 8)),  ((25, 32), (1, 31), (1, 6))
+ranges['May'],       ranges['June']     = ((29, 31), (1, 32), (1, 10)),  ((27, 32), (1, 31), (1, 8))
 
-ranges['July'],      ranges['August']   = ((25, 31), (1, 32), (1, 6)),  ((30, 32), (1, 32), (1, 10))
-ranges['September'], ranges['October']  = ((27, 32), (1, 31), (1, 8)),  ((24, 31), (1, 32), (1, 5))
-ranges['November'],  ranges['December'] = ((29, 32), (1, 31), (1, 10)),  ((26, 31), (1, 32), (1, 7))
+ranges['July'],      ranges['August']   = ((24, 31), (1, 32), (1, 5)),  ((29, 32), (1, 32), (1, 9))
+ranges['September'], ranges['October']  = ((26, 32), (1, 31), (1, 7)),  ((30, 31), (1, 32), (1, 11))
+ranges['November'],  ranges['December'] = ((28, 32), (1, 31), (1, 9)),  ((25, 31), (1, 32), (1, 6))
 
 calendar = {}
-for month, start_ends in ranges.iteritems():
+for month, start_ends in ranges.items():
 	calendar[month] = sum((list(range(*start_end)) for start_end in start_ends), [])
 
 ht = 2
@@ -61,7 +61,7 @@ def normalize():
 	vb3.configure(state="disabled")
 
 def save():
-	s = open("Months 2016/"+l1["text"]+".txt", "w")
+	s = open("Months 2018/"+l1["text"]+".txt", "w")
 	text = text1.get(1.0, END)
 	try:
 		s.write(text.rstrip())
@@ -73,7 +73,7 @@ def save():
 def load():
 	text1.configure(state="normal")
 	l2.configure(text=l1["text"]+" "+str(current_year))
-	text = open("Months 2016/"+l1["text"]+".txt").read()
+	text = open("Months 2018/"+l1["text"]+".txt").read()
 	text1.delete(1.0, END)
 	text1.insert(END, text)
 	text1.mark_set(INSERT, 1.0)
@@ -86,14 +86,14 @@ def check_em(button_name, new_months):
 	if l1["text"] == months[month-1]:
 		if new_months == day:
 			button_name.configure(bg=bg3, fg=fg2)
-		elif "["+l1["text"]+" "+str(new_months)+"]" in open("Months 2016/"+l1["text"]+".txt").read(): #removed +"\n"
+		elif "["+l1["text"]+" "+str(new_months)+"]" in open("Months 2018/"+l1["text"]+".txt").read(): #removed +"\n"
 			if new_months > day:
 				button_name.configure(bg=bg2, fg=fg1) #changed from fg2 to fg1
 			else: 
 #				button_name.configure(bg=bg1, fg=fg1)
 				button_name.configure(bg=bg1, fg="blue")
 	else:
-		if "["+l1["text"]+" "+str(new_months)+"]" in open("Months 2016/"+l1["text"]+".txt").read(): #removed +"\n"
+		if "["+l1["text"]+" "+str(new_months)+"]" in open("Months 2018/"+l1["text"]+".txt").read(): #removed +"\n"
 			if months.index(l1["text"]) < month-1:
 				button_name.configure(bg=bg1, fg="blue")
 			else:
@@ -125,7 +125,7 @@ def center(win):
     height = win.winfo_height()
     x = (win.winfo_screenwidth() // 2) - (width // 2)
     y = (win.winfo_screenheight() // 2) - (height // 2)
-    win.geometry('{}x{}+{}+{}'.format(width, height, x, y-30))		
+    win.geometry('{}x{}+{}+{}'.format(width, height, x, y-75))		
 
 	
 root = Tk()
